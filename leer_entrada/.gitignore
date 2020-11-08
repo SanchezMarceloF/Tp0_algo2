@@ -1,0 +1,10 @@
+#ignoro los archivos pdf en este directorio
+*.pdf
+
+#archivos de intercambio de vim
+*.swp
+
+#ejecutables
+
+*.exe
+*.out
