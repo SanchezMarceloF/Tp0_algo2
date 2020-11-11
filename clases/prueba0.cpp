@@ -7,9 +7,10 @@
 
 using namespace std;
 
+
 typedef struct{
         float value;
-        std::string addr; //dirección destino de los fondos, 64 bytes fijos (es un hash)
+        string addr; //dirección destino de los fondos, 64 bytes fijos (es un hash)
 } output_t;
 
 int main() {

@@ -15,8 +15,15 @@ public:
 	Block(size_t, size_t);// recibe txn_count y bits 
 	bool setNonce()
 	
+	//getters
+	//std::string& getTxs();
+	//std::string& getTx(int);
+	calcTxHash();	
 }
 
+void setNonce(Block& aux){
+	aux //calcular nonce con dificultad d verificando doble hash del header.
+}
 
 
 bool checkDifficulty(unsigned int difficulty, string hash){

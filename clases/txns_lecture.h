@@ -42,10 +42,12 @@ public:
 	//~Transaction();
 
 	//setters
-	setOut(int, Array<output_t>&);
+	void setTx(const & Array <input_t>, int);
+	void setTx(const & Array <output_t>, int);
 	
 	//getters				
-	output_t& getOut(size_t); //devuelve el output con indice como argumento  
+	//output_t& getOut(size_t); //devuelve el output con indice como argumento  
+	
 };
 
 //
