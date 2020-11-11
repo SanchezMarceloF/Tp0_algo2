@@ -10,8 +10,7 @@
 Transaction::Transaction(){ 
 	std::cout<<"entro al constructor sin argumentos"<<std::endl;
 	n_tx_out = 1;
-	Array <output_t> aux(n_tx_out);
-	Array <output_t> outputs(aux);
+	Array <output_t> outputs(n_tx_out);
 }
 
 //Constructor con nro txns in
@@ -39,13 +38,26 @@ Transaction::Transaction(){
 //}
 
 
-	//seter
-	Transaction::setOut(int n, Array<output_t>& aux){
-		
-		
+//setters
+//void Transaction::setTx(const & Array <input_t>, int){
 
-	
-	//getters				
-	output_t& getOut(size_t); //devuelve el output con indice como argumento  
+//setea un output dentro del arreglo outputs.
+void Transaction::setTx(const output_t& inic, unsigned index){
+	if(n_tx_out <= index)
+		std::cout<<"índice fuera de rango"<<std::endl;
+	else
+		(this -> outputs)[index] = inic;
+}
+		
+		
+//getters
+//se obtiene un output con índice index  del Array outputs
+output_t& Transaction::getOut(unsigned index){
+	if(n_tx_out <= index){
+		std::cout<<"índice fuera de rango"<<std::endl;
+	}
+	else	
+		return (this -> outputs)[index]; 	
+}
 	
 						

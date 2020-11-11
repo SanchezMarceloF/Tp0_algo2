@@ -19,7 +19,7 @@
 //} input_t;
 
 typedef struct{
-	float value;
+	float value = 0;
 	std::string addr; //dirección destino de los fondos, 64 bytes fijos (es un hash)
 } output_t;
 
@@ -42,11 +42,11 @@ public:
 	//~Transaction();
 
 	//setters
-	void setTx(const & Array <input_t>, int);
-	void setTx(const & Array <output_t>, int);
+	//void setTx(const Array <input_t>&, int);
+	void setTx(const output_t&, unsigned);
 	
 	//getters				
-	//output_t& getOut(size_t); //devuelve el output con indice como argumento  
+	output_t& getOut(unsigned); //devuelve el output con indice como argumento  
 	
 };
 

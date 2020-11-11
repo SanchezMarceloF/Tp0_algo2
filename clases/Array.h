@@ -40,8 +40,8 @@ Array<T>::Array(){
 template <class T>
 Array<T>::Array(size_t n){
 	std::cout<<"constructor Array con argumento tamaño" << std::endl;
-	size=n;
-	ptr=new T[size];
+	size = n;
+	ptr = new T[size];
 }
 
 //constructor con Array como parametro

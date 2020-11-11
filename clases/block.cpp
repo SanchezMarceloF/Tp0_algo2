@@ -17,7 +17,7 @@ public:
 	
 	//getters
 	//std::string& getTxs();
-	//std::string& getTx(int);
+	//std::string& getTx(int); //se pasa el nro de Txn
 	calcTxHash();	
 }
 
