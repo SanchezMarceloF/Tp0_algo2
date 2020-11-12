@@ -18,11 +18,13 @@ public:
 	//getters
 	//std::string& getTxs();
 	//std::string& getTx(int); //se pasa el nro de Txn
-	calcTxHash();	
+
+	//método para calcular el hash de las transacciones.
+	calcTxHash();
 }
 
 void setNonce(Block& aux){
-	aux //calcular nonce con dificultad d verificando doble hash del header.
+	aux //calcular nonce verificando doble hash del header y dificultad d..
 }
 
 

@@ -39,7 +39,6 @@ Array<T>::Array(){
 //constructor con parametro tamaño
 template <class T>
 Array<T>::Array(size_t n){
-	std::cout<<"constructor Array con argumento tamaño" << std::endl;
 	size = n;
 	ptr = new T[size];
 }
@@ -47,7 +46,6 @@ Array<T>::Array(size_t n){
 //constructor con Array como parametro
 template <class T>
 Array<T>::Array(const Array<T> &init){
-	std::cout<<"constructor Array con argumento Array" << std::endl;
 	size = init.size;
 	ptr = new T[size];
 	for(int i=0; i<size; i++)
@@ -57,7 +55,6 @@ Array<T>::Array(const Array<T> &init){
 //Destructor
 template <class T>
 Array<T>::~Array(){
-	std::cout<<"destructor Array" << std::endl;
 	if(ptr)
 		delete []ptr;
 }
@@ -67,7 +64,6 @@ Array<T>::~Array(){
 template <class T>
 Array<T>& Array<T>::setArray(const T& aux, int inx){
 	if (size < inx-1){
-		std::cout<<"no se puede cargar valor"<<std::endl;
 		return *this;
 	}
 	else{
@@ -124,6 +120,4 @@ T & Array<T>::operator[]( int subscript ){
 	return ptr[ subscript ];
 }
 
-#endif 
-
-
+#endif

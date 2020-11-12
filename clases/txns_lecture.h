@@ -8,15 +8,11 @@
 
 //std::ifstream infile("thefile.txt");
 
-//typedef struct{
-//	string tx_id;// el hash de la transaccion de donde este input toma fondos, 64 bytes fijos.
-//	size_t idx;//idx sirve de indice sobre la secuencia de outputs de la transaccion con hash tx_id
-//} outpoint_t;
-//
-//typedef struct{
-//	outpoint_t outpoint;
-//	string addr;//direccion de origen de los fondos, 64 bytes fijos(es un hash)
-//} input_t;
+typedef struct{
+	std::string tx_id;// el hash de la transaccion de donde este input toma fondos, 64 bytes fijos.
+	size_t idx;//idx sirve de indice sobre la secuencia de outputs de la transaccion con hash tx_id
+	std::string addr;//direccion de origen de los fondos, 64 bytes fijos(es un hash)
+} input_t;
 
 typedef struct{
 	float value = 0;
@@ -27,8 +23,8 @@ typedef struct{
 class Transaction{
 private:
 	//INPUTS 
-	//size_t n_tx_in;
-	//Array <input_t> inputs;
+	size_t n_tx_in;
+	Array <input_t> inputs;
 	//OUTPUTS
 	size_t n_tx_out;
 	Array <output_t> outputs;
@@ -42,20 +38,13 @@ public:
 	//~Transaction();
 
 	//setters
-	//void setTx(const Array <input_t>&, int);
+	void setTx(const input_t&, unsigned);
 	void setTx(const output_t&, unsigned);
 	
 	//getters				
+	input_t& getIn(unsigned); //devuelve el input con indice como argumento  
 	output_t& getOut(unsigned); //devuelve el output con indice como argumento  
 	
 };
 
-//
-//inputsLecture(){
-//
-//};
-//
-//outputsLecture(){
-//		
-//};
 #endif //TXNS_LECTURE_INCLUDED
