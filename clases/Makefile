@@ -4,8 +4,8 @@ CXXFLAGS = -I. $(CXXARGS)
 
 all: prueba0 prueba1 #utxns.exe
 	
-prueba2: block.h block.cpp prueba2.cpp txns_lecture.cpp txns_lecture.h Array.h
-	$(CXX) $(CXXFLAGS) prueba2.cpp block.h block.cpp txns_lecture.cpp txns_lecture.h Array.h -o prueba2 && ./prueba2
+prueba2: sha256.h sha256.cpp block.h block.cpp prueba2.cpp txns_lecture.cpp txns_lecture.h Array.h
+	$(CXX) $(CXXFLAGS) sha256.h sha256.cpp prueba2.cpp block.h block.cpp txns_lecture.cpp txns_lecture.h Array.h -o prueba2 && ./prueba2
 
 prueba1: prueba1.cpp txns_lecture.cpp txns_lecture.h Array.h
 	$(CXX) $(CXXFLAGS) prueba1.cpp txns_lecture.cpp txns_lecture.h Array.h -o prueba1 && ./prueba1

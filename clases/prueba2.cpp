@@ -8,6 +8,7 @@
 #include "block.h"
 #include "txns_lecture.h"
 #include "Array.h"
+#include "sha256.h"
 
 using namespace std;
 
@@ -39,14 +40,14 @@ int main() {
 
 	//cargo los inputs y outputs en una transaccion
 	txns_a.setTx(in_j);
-	txns_a.setTx(in_k);
 	txns_a.setTx(out_m);
-	txns_a.setTx(out_n);
-	txns_a.setTx(out_m);
-	txns_a.setTx(in_k);
-	txns_a.setTx(out_m);
-	txns_a.setTx(out_n);
 	
+	txns_b.setTx(in_k);
+	txns_b.setTx(out_n);
+	txns_b.setTx(out_m);
+	txns_b.setTx(in_k);
+	txns_b.setTx(out_m);
+	txns_b.setTx(out_n);
 	txns_b.setTx(in_k);
 	txns_b.setTx(out_m);
 	txns_b.setTx(out_n);
@@ -59,14 +60,17 @@ int main() {
 	tam1 = txns_a.getNtxin();
 	tam2 = txns_a.getNtxout();
 		
-	cout<<tam1<<'\t'<<tam2<<"\n\n";
+	//cout<<tam1<<'\t'<<tam2<<"\n\n";
 	
-	string aux = txns_a.getAll();
-	cout<<aux;
+	//string aux = txns_a.getAll();
+	//cout<<aux;
 	
 	cout<<":: Transacciones en el Bloque :: \n\n";
-	aux = block_A.getTxns();
-        cout<<aux;	
+	string aux = block_A.getTxns();
+        cout<<aux;
+	aux = block_A.getTxnsHash();
+	cout<<"txns_hash: "<<aux<<endl;
+	
 
 // :: Pruebas para constructores, setters y getters ::
 //--------------------------------------------------------------------------

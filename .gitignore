@@ -1,5 +1,6 @@
 #archivos de intercambio de vim
 *.swp
+*.swo
 
 #objetos y ejecutables
 *.exe

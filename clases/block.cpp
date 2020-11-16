@@ -4,6 +4,7 @@
 #include "block.h"
 #include "txns_lecture.h"
 #include "Array.h"
+#include "sha256.h"
 
 
 //constructor sin argumentos
@@ -46,11 +47,11 @@ void Block::setTxns(const Transaction& elem){
 }
 
 bool Block::setHash(){
-	//if(tx_count > 0){
-		
-	//	return true;
-	//}
-	//else
+	if(txn_count > 0){
+		txns_hash = sha256(sha256(getTxns()));	
+		return true;
+	}
+	else
 		return false;
 }
 
@@ -77,6 +78,10 @@ std::string Block::getTxns(unsigned indx){//se pasa el nro de Txns
 	if(indx < txn_count)
 		return (this->txns[indx]).getAll();
 	return "nada";
+}
+
+std::string Block::getTxnsHash(){
+	return txns_hash;
 }
 
 

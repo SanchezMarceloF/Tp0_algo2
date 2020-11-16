@@ -6,6 +6,7 @@
 #include <fstream>
 #include "txns_lecture.h"
 #include "Array.h"
+#include "sha256.h"
 
 // Se crea la clase Block para organizar sus campos,  un Array de
 // transacciones(class Transaction)
@@ -42,6 +43,7 @@ public:
 	//getters
 	std::string getTxns();
 	std::string getTxns(unsigned indx);//se pasa el nro de Txns
+	std::string getTxnsHash();
 };
 
 
