@@ -33,7 +33,7 @@ private:
 //constructor sin argumentos
 template <class T>
 Array<T>::Array(){
-	std::cout<<"CONSTRUCTOR ARRAY SIN ARGUMENTOS"<<std::endl;
+	//std::cout<<"CONSTRUCTOR ARRAY SIN ARGUMENTOS"<<std::endl;
 	ptr=new T[10];
 	size=10;
 }

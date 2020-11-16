@@ -31,7 +31,7 @@ Transaction::Transaction(const size_t num1, const size_t num2){
 //no estoy seguro de que esté bien, deberían llamarse los de la clase
 //Array automáticamente. Aquí no creamos nada con new.
 Transaction::~Transaction(){ 
-	std::cout<<"--DESTRUCTOR TRANSACTION--"<<std::endl;
+//	std::cout<<"--DESTRUCTOR TRANSACTION--"<<std::endl;
 	//if(inputs)
 	//	delete []inputs;
 	//if(outputs)
@@ -43,7 +43,7 @@ Transaction::~Transaction(){
 //setea un nuevo input, agregando el elemento
 //al Array (se redimensiona)
 void Transaction::setTx(const input_t& inic){
-	n_tx_in = inputs.setArray(inic).getSize();
+	n_tx_in = (this->inputs).setArray(inic).getSize();
 }
 
 //setea un nuevo output, agregando el elemento
@@ -88,6 +88,7 @@ std::string Transaction::getAll(){
 	//verifico que haya inputs
 	std::string txns_aux;
 	if(n_tx_in > 0){
+		txns_aux = std::to_string(n_tx_in) + '\n' ;
 		std::string idx_aux;
 		for(unsigned i=0; i<n_tx_in; i++){
 			txns_aux = txns_aux + inputs[i].tx_id + ' ';
@@ -98,10 +99,9 @@ std::string Transaction::getAll(){
 	}
 	//verifico que haya outputs
 	if(n_tx_out > 0){
-		std::string value_aux;
-		for(unsigned i=0; i<n_tx_in; i++){
-			value_aux = std::to_string(outputs[i].value);
-			txns_aux = txns_aux + value_aux + ' ';
+		txns_aux = txns_aux + std::to_string(n_tx_out) + '\n' ;
+		for(unsigned i=0; i<n_tx_out; i++){
+			txns_aux = txns_aux + outputs[i].value + ' ';
 			txns_aux = txns_aux + outputs[i].addr + '\n'; 
 		}
 	}
