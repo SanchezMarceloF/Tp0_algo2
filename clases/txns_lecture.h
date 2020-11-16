@@ -9,17 +9,21 @@
 //std::ifstream infile("thefile.txt");
 
 typedef struct{
-	std::string tx_id;// el hash de la transaccion de donde este input toma fondos, 64 bytes fijos.
-	size_t idx;//idx sirve de indice sobre la secuencia de outputs de la transaccion con hash tx_id
-	std::string addr;//direccion de origen de los fondos, 64 bytes fijos(es un hash)
+	std::string tx_id;// el hash de la transaccion de donde este 
+			  //input toma fondos, 64 bytes fijos.
+	size_t idx;//idx sirve de indice sobre la secuencia de outputs
+		   //de la transaccion con hash tx_id
+	std::string addr;//direccion de origen de los fondos, 64 bytes
+			 //fijos(es un hash)
 } input_t;
 
 typedef struct{
 	float value = 0;
-	std::string addr; //dirección destino de los fondos, 64 bytes fijos (es un hash)
+	std::string addr; //dirección destino de los fondos, 64 bytes 
+			  //fijos (es un hash)
 } output_t;
 
-//
+
 class Transaction{
 private:
 	//INPUTS 
@@ -32,18 +36,27 @@ private:
 public:
 	//Constructores
 	Transaction();	//sin argumentos
-	//Transaction(int); 	//con nro txns in
-	//Transaction(int, int); //con nro txns in & out
+	Transaction(const size_t); //# imputs 
+	Transaction(const size_t, const size_t); //#inputs, #outputs
 	//Destructor
-	//~Transaction();
+	~Transaction();
 
 	//setters
+	void setTx(const input_t&);//se agrega un input
+	void setTx(const output_t&);//se agrega un output
+	//se modifica/agrega un input en el indice indicado
 	void setTx(const input_t&, unsigned);
+	//se modifica/agrega un input en el indice indicado
 	void setTx(const output_t&, unsigned);
 	
 	//getters				
-	input_t& getIn(unsigned); //devuelve el input con indice como argumento  
-	output_t& getOut(unsigned); //devuelve el output con indice como argumento  
+	size_t getNtxin();
+	size_t getNtxout();
+	input_t& getIn(unsigned); //devuelve el input con indice como
+				  // argumento  
+	output_t& getOut(unsigned); //devuelve el output con indice 
+				    //como argumento  
+	std::string getAll(); //devuelve inputs y outputs como string
 	
 };
 

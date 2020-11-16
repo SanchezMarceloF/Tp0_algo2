@@ -13,10 +13,11 @@ public:
 	~Array();
 	
 	//seters
-	Array<T>& setArray(const T&, int);
+	Array<T>& setArray(const T& elem);
+	Array<T>& setArray(const T&, size_t);
 		
 	//getters
-	int getSize();
+	size_t getSize();
 		
 	//otros metodos	
 	Array<T> &operator=(const Array<T> &);
@@ -25,13 +26,14 @@ public:
 	//void emitir();
 
 private:
-	int size;
+	size_t size;
 	T *ptr;
 };
 
 //constructor sin argumentos
 template <class T>
 Array<T>::Array(){
+	std::cout<<"CONSTRUCTOR ARRAY SIN ARGUMENTOS"<<std::endl;
 	ptr=new T[10];
 	size=10;
 }
@@ -48,7 +50,7 @@ template <class T>
 Array<T>::Array(const Array<T> &init){
 	size = init.size;
 	ptr = new T[size];
-	for(int i=0; i<size; i++)
+	for(unsigned i=0; i<size; i++)
 		ptr[i] = init.ptr[i];
 }
 
@@ -60,9 +62,25 @@ Array<T>::~Array(){
 }
 
 //setters
-//carga de un objeto en 
+//carga de un elemento a al Final del Array 
 template <class T>
-Array<T>& Array<T>::setArray(const T& aux, int inx){
+Array<T>& Array<T>::setArray(const T& elem){
+	T *aux;
+	size = size+1;
+	aux = new T[ size ];
+	for (unsigned i = 0; i < size-1; i++){
+		//std::cout<<i<<std::endl;
+		aux[i] = ptr[i];
+	}
+	aux [size-1] = elem; 
+	delete []ptr;
+	ptr = aux;	
+	return *this;
+}
+
+//se carga un elemento en el índice inx
+template <class T>
+Array<T>& Array<T>::setArray(const T& aux, size_t inx){
 	if (size < inx-1){
 		return *this;
 	}
@@ -76,7 +94,7 @@ Array<T>& Array<T>::setArray(const T& aux, int inx){
 //getters
 //metodo para obtener parametro size
 template <class T>
-int Array<T>::getSize(){
+size_t Array<T>::getSize(){
 	return size;
 }
 
@@ -90,12 +108,12 @@ Array<T>& Array<T>::operator=( const Array<T> &rigth ){
 			delete [] ptr;
 			size = rigth.size ;
 			ptr = aux;
-			for (int i = 0; i < size; i++)
+			for (unsigned i = 0; i < size; i++)
 				{ptr[ i ] = rigth.ptr[ i ];}
 			return *this;
 		}
 		else{
-		 	for ( int i = 0; i < size; i++ )
+		 	for ( unsigned i = 0; i < size; i++ )
 				ptr[ i ] = rigth.ptr[ i ];
 		return *this;
 		}
@@ -108,7 +126,7 @@ bool Array<T>::operator==( const Array<T> &rigth ){
 	if ( size != rigth.size )
 		return false;
 	else
-		for ( int i = 0; i < size; i++ )
+		for ( unsigned i = 0; i < size; i++ )
 			if ( ptr[i] != rigth.ptr[i] )
 				return false;
 	else
