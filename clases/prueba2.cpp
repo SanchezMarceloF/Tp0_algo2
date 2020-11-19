@@ -1,14 +1,12 @@
 // se prueba la clase Block
 // el metodo setHash
 // con el metodo getAll de Transaction
-
-
 #include <iostream>
 #include <string>
 #include "block.h"
 #include "txns_lecture.h"
-#include "Array.h"
-#include "sha256.h"
+//#include "Array.h"
+//#include "sha256.h"
 
 using namespace std;
 
