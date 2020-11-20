@@ -26,7 +26,7 @@ private:
 	std::string prev_block;
 	std::string txns_hash;//hash de todas las transacciones incluidas en el bloque
 	size_t bits;
-	size_t nonce;
+	int nonce;
 	//BODY
 	size_t txn_count;//cantidad total de transacciones
 	Array <Transaction> txns;
@@ -38,26 +38,24 @@ public:
 	//seters
 	void setTxns(const Transaction&);
 	bool setHash();	
-	bool setNonce(int);
+	bool setNonce();
 	
 	//getters
 	std::string getTxns();
 	std::string getTxns(unsigned indx);//se pasa el nro de Txns
 	std::string getTxnsHash();
+	std::string getHeader();
+	
+	//otros
+	bool checkDifficulty(int,const std::string&);
 };
 
 
 // :: Funciones no miembro de la clase ::
 //--------------------------------------------------------------------
 
-//void setNonce(Block& aux){
-//	aux //calcular nonce verificando doble hash del header y dificultad d..
-//}
-
-
-//bool checkDifficulty(unsigned int difficulty, std::string hash){
 //
-//	for(size_t i=0; i < difficulty; i++){
+//	for(int i=0; i < difficulty; i++){
 //		if(hash[i]!='0')
 //			return false;
 //	}

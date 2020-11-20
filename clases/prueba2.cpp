@@ -14,10 +14,10 @@ int main() {
 	cout<<":: Bienvenido a prueba2.cpp ::\n"<< endl;
 	Block block_A;
 	Transaction txns_a,txns_b;
-	size_t tam1 = txns_a.getNtxin();
-	size_t tam2 = txns_a.getNtxout();
+	//size_t tam1 = txns_a.getNtxin();
+	//size_t tam2 = txns_a.getNtxout();
 		
-	cout<<tam1<<'\t'<<tam2<<"\n\n";
+	//cout<<tam1<<'\t'<<tam2<<"\n\n";
 	
 	input_t in_j, in_k;
 	output_t out_m, out_n;
@@ -40,23 +40,23 @@ int main() {
 	txns_a.setTx(in_j);
 	txns_a.setTx(out_m);
 	
-	txns_b.setTx(in_k);
+	//txns_b.setTx(in_k);
 	txns_b.setTx(out_n);
-	txns_b.setTx(out_m);
-	txns_b.setTx(in_k);
-	txns_b.setTx(out_m);
-	txns_b.setTx(out_n);
+	//txns_b.setTx(out_m);
 	txns_b.setTx(in_k);
 	txns_b.setTx(out_m);
-	txns_b.setTx(out_n);
-	txns_b.setTx(out_m);
+	//txns_b.setTx(out_n);
+	//txns_b.setTx(in_k);
+	//txns_b.setTx(out_m);
+	//txns_b.setTx(out_n);
+	//txns_b.setTx(out_m);
 
 	//cargo las transacciones en un bloque
 	block_A.setTxns(txns_a);
 	block_A.setTxns(txns_b);
 	
-	tam1 = txns_a.getNtxin();
-	tam2 = txns_a.getNtxout();
+	//tam1 = txns_a.getNtxin();
+	//tam2 = txns_a.getNtxout();
 		
 	//cout<<tam1<<'\t'<<tam2<<"\n\n";
 	
@@ -66,8 +66,14 @@ int main() {
 	cout<<":: Transacciones en el Bloque :: \n\n";
 	string aux = block_A.getTxns();
         cout<<aux;
-	aux = block_A.getTxnsHash();
-	cout<<"txns_hash: "<<aux<<endl;
+	block_A.setHash();
+	//aux = block_A.getTxnsHash();
+	//cout<<"txns_hash: "<<aux<<endl;
+
+	block_A.setNonce();
+	aux = block_A.getHeader();
+	cout<<":: HEADER ::\n\n"<<aux;
+	
 	
 
 // :: Pruebas para constructores, setters y getters ::

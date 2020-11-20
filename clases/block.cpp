@@ -55,8 +55,20 @@ bool Block::setHash(){
 		return false;
 }
 
-bool Block::setNonce(int nonce){
-	return false;
+bool Block::setNonce(){	
+	
+	this->nonce = 0;
+	bool cheq = false;
+	std::string hash_aux;
+
+	do{
+	nonce++;
+	hash_aux = sha256(sha256(getHeader()));
+	cheq = checkDifficulty(bits, hash_aux);
+	}	
+	while(!cheq);
+	
+	return cheq; 
 }
 
 //getters
@@ -84,20 +96,24 @@ std::string Block::getTxnsHash(){
 	return txns_hash;
 }
 
+std::string Block::getHeader(){
+	std::string head_aux;
 
-// :: Funciones no miembro de la clase ::
-//--------------------------------------------------------------------
+	head_aux = prev_block + '\n';
+	head_aux += txns_hash + '\n';
+	head_aux += std::to_string(bits) + '\n';
+	head_aux += std::to_string(nonce) + '\n';
 
-//void setNonce(Block& aux){
-//	aux //calcular nonce verificando doble hash del header y dificultad d..
-//}
+	return head_aux;
+}
 
-//bool checkDifficulty(unsigned int difficulty, string hash){
-//
-//	for(size_t i=0; i < difficulty; i++){
-//		if(hash[i]!='0')
-//			return false;
-//	}
-//	return true;
-//}
+
+bool Block::checkDifficulty(int dificultad,const std::string& hash){
+
+	for(int i=0; i < dificultad; i++){
+		if(hash[i] !='0')
+			return false;
+	}
+	return true;
+}
 
