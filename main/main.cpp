@@ -150,50 +150,91 @@ opt_help(string const &arg)
 	//cout << "cmdline -f factor [-i file] [-o file]"
 	cout << "cmdline -d difficulty [-i file] [-o file]"
 	     << endl;
-	exit(0);}
+	exit(0);
+}
+
+bool
+CheckNum(const string& val){
+	bool cheq = false;
+	for( unsigned i = 0; i < val.size(); i++){
+		if(val[i] < '0' || val[i] > '9')
+			return false;
+	}
+	return true;
+}
 
 void
 leer(istream *is, ostream *os)
 {
+	char check_aux;
 	unsigned n_in, n_out;
+	bool tx_load = true;
+	bool good = true;
+	bool bad = false;
 	Block block_a;
 	Transaction txns_a;
 	input_t in_j;
 	output_t out_m;
 	
-	//chequeo que la primera linea contenga un unsigned
-	if(!(*is >> n_in)) 
-		cout<<"ERROR EN TXNS IN"<<endl;
-	else{
-		for(unsigned i=0; i<n_in ; i++){
-			*is >> in_j.tx_id; 		
-			*is >> in_j.idx;
-			*is >> in_j.addr;
-			txns_a.setTx(in_j);
-		}
-		if(!(*is >> n_out)) 
-			cout<<"ERROR TXNS OUT"<<endl;
-		else{
-			for(unsigned i=0; i<n_out ; i++){
-				*is >> out_m.value; 		
-				*is >> out_m.addr;
-				txns_a.setTx(out_m);
+
+	
+	do{
+		if(!(*is>>n_in)){
+			tx_load = false;
+			if(!(is->eof())){
+				bad = true;
+				good = false;
 			}
-		}		
+		}	
+		else{
+			for(unsigned i=0; i<n_in ; i++){
+				*is >> in_j.tx_id; 		
+				*is >> in_j.idx;
+				*is >> in_j.addr;
+				txns_a.setTx(in_j);
+			}
+			//chequeo si hay un '\n'
+			//if(is->eof() || (*is >> check_aux && check_aux == '\n'))
+			//	tx_load = false;
+			//if(tx_load)
+			//	is->putback(check_aux);
+			//chequeo siga un unsigned para los outputs
+			if(!(*is >> n_out)){
+				tx_load = false;
+				if(!(is->eof())){
+					bad = true;
+					good = false;
+				}
+			}
+			else{
+				for(unsigned i=0; i<n_out ; i++){
+					*is >> out_m.value;
+					*is >> out_m.addr;
+					txns_a.setTx(out_m);
+				}
+			}		
+		}
+		if(good && !(is->eof()))
+		//se carga la transacción en el bloque
+			block_a.setTxns(txns_a);
+			
+	}while(tx_load && !(is->eof()));
+	
+	//si el archivo se leyó bien		
+	if(good){
+		//calculo hash y nonce en el bloque	
+		block_a.setHash();
+		block_a.setNonce();
+		//lo envío a la salida
+		*os <<  block_a.getHeader();
+		*os <<  block_a.getTxns();
 	}
-	block_a.setTxns(txns_a);
 	
-	*os<<":: Transacciones en el Bloque :: \n\n";
-	input = block_a.getTxns();
-	output = block_a.getTxnsHash();
-	output = sha256(sha256(input));
-	*os << input <<endl;
-	*os <<"Hash: "<<output<<endl; 
-	
-	//while (*is >> num) {
-	//	*os << num * difficulty
-	//	    << "\n";
-	//}
+	//si no pude leer la entrada
+	//seteo el flag bad de *ios
+	if(bad)
+		is->clear(ios::badbit);
+
 	if (os->bad()) {
 		cerr << "cannot write to output stream."
 		     << endl;
